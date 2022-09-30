@@ -1,9 +1,9 @@
 
 export class Todo {
-  item: string;
+  text: string;
   id: string;
   constructor(enteredItem: string) {
-      this.item = enteredItem;
+      this.text = enteredItem;
       this.id = Math.random().toString();
   }
 }
