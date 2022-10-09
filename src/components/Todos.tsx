@@ -10,6 +10,7 @@ const Todos: React.FC = () => {
             {todosCtx.todos.map(item => (
                 <TodoItem onRemoveHandler={todosCtx.removeTodo.bind(null, item.id)}
                           onIsDoneHandler={todosCtx.isDone.bind(null, item.id)}
+                          checked={item.checked}
                           text={item.text}
                           key={item.id}/>))}
         </ul>
