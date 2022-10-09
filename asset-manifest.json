@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Enxoxil/TODO-List/static/css/main.2971603f.css",
+    "main.js": "/Enxoxil/TODO-List/static/js/main.892028eb.js",
+    "index.html": "/Enxoxil/TODO-List/index.html",
+    "main.2971603f.css.map": "/Enxoxil/TODO-List/static/css/main.2971603f.css.map",
+    "main.892028eb.js.map": "/Enxoxil/TODO-List/static/js/main.892028eb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2971603f.css",
+    "static/js/main.892028eb.js"
+  ]
+}
