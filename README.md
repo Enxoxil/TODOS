@@ -1,1 +1,0 @@
-Practise stack: TS, React (Context, Hooks), module CSS
