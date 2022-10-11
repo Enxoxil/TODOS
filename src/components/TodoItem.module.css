@@ -10,5 +10,25 @@
 .control {
     display: flex;
     justify-content: space-between;
-    width: 20%;
+    align-items: center;
+    min-width: 100px;
+    width: 15%;
+    padding: 0 5px;
+    font-weight: bold;
+}
+
+.control button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+.control button:hover{
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+}
+.control input{
+    cursor: pointer;
+    border: none;
 }
