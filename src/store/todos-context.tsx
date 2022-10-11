@@ -7,7 +7,7 @@ type ContextTypeObj = {
     addTodo: (text: string) => void,
     removeTodo: (id: string) => void,
     isDone: (id: string) => void,
-    inputEvent: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    inputEvent: (event: React.ChangeEvent<HTMLTextAreaElement>) => void,
     inputValue: string,
 }
 
@@ -29,7 +29,7 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [enteredValue, setEnteredValue] = useState('');
 
-    const inputHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const inputHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
         setEnteredValue(event.target.value);
     };
     const addTodosHandler = (text: string) => {

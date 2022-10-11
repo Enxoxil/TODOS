@@ -10,7 +10,7 @@
     margin-bottom: 0.5rem;
 }
 
-.form input {
+.form textarea {
     display: block;
     width: 100%;
     font: inherit;

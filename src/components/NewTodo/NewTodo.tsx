@@ -1,16 +1,17 @@
 import React, {useContext, useRef} from 'react';
 import classes from './NewTodo.module.css';
-import {TodosContext} from "../store/todos-context";
-
+import {TodosContext} from "../../store/todos-context";
+import {Input} from "antd";
 
 const NewTodo: React.FC = () => {
+    const {TextArea} = Input;
     const todosCtx = useContext(TodosContext);
     // const todoTextInputRef = useRef<HTMLInputElement>(null);
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
         // const enteredText = todoTextInputRef.current!.value
         const enteredText = todosCtx.inputValue;
-        if(enteredText.trim().length === 0){
+        if (enteredText.trim().length === 0) {
             //TODO throw error
             return;
         }
@@ -24,7 +25,9 @@ const NewTodo: React.FC = () => {
             <form onSubmit={formSubmitHandler} className={classes.form}>
                 <label htmlFor='text'>Please enter TODO text</label>
                 {/*<input type='text' id='text' ref={todoTextInputRef} value={todosCtx.inputValue} onChange={todosCtx.inputEvent}/>*/}
-                <input type='text' id='text' value={todosCtx.inputValue} onChange={todosCtx.inputEvent}/>
+                {/*<input type='text' id='text' value={todosCtx.inputValue} onChange={todosCtx.inputEvent}/>*/}
+                <TextArea placeholder='Please, enter yours TODO' allowClear autoSize={{ maxRows: 1}}
+                          value={todosCtx.inputValue} onChange={todosCtx.inputEvent}/>
                 <button type='submit'>Add TODO</button>
             </form>
         </>
