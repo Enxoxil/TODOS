@@ -3,31 +3,24 @@ import classes from './NewTodo.module.css';
 import {TodosContext} from "../../store/todos-context";
 import {Input} from "antd";
 
-const NewTodo: React.FC = () => {
+interface INewTodo {
+    formSubmitHandler: (event: React.FormEvent) => void,
+    onKeyDownHandler:(event: React.KeyboardEvent) => void,
+}
+
+const NewTodo: React.FC<INewTodo> = (props) => {
     const {TextArea} = Input;
     const todosCtx = useContext(TodosContext);
     // const todoTextInputRef = useRef<HTMLInputElement>(null);
-    const formSubmitHandler = (event: React.FormEvent) => {
-        event.preventDefault();
-        // const enteredText = todoTextInputRef.current!.value
-        const enteredText = todosCtx.inputValue;
-        if (enteredText.trim().length === 0) {
-            //TODO throw error
-            return;
-        }
-
-        todosCtx.addTodo(enteredText);
-        // todoTextInputRef.current!.value = '';
-    }
 
     return (
         <>
-            <form onSubmit={formSubmitHandler} className={classes.form}>
+            <form onSubmit={props.formSubmitHandler} className={classes.form}>
                 <label htmlFor='text'>Please enter TODO text</label>
                 {/*<input type='text' id='text' ref={todoTextInputRef} value={todosCtx.inputValue} onChange={todosCtx.inputEvent}/>*/}
                 {/*<input type='text' id='text' value={todosCtx.inputValue} onChange={todosCtx.inputEvent}/>*/}
-                <TextArea placeholder='Please, enter yours TODO' allowClear autoSize={{ maxRows: 1}}
-                          value={todosCtx.inputValue} onChange={todosCtx.inputEvent}/>
+                <TextArea placeholder='Please, enter your TODO. (shift + enter = add todo).' allowClear autoSize={{ maxRows: 1}}
+                          value={todosCtx.inputValue} onChange={todosCtx.inputEvent} onKeyDown={props.onKeyDownHandler} />
                 <button type='submit'>Add TODO</button>
             </form>
         </>

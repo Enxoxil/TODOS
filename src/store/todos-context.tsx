@@ -32,6 +32,8 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
     const inputHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
         setEnteredValue(event.target.value);
     };
+
+
     const addTodosHandler = (text: string) => {
         const item = new Todo(text);
         setTodos([...todos, item])
