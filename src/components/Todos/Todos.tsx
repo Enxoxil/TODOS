@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import TodoItem from "../TodoItem/TodoItem";
+import TodoItemContainer from "../TodoItem/TodoItemContainer";
 import classes from "./Todos.module.css";
 import {TodosContext} from "../../store/todos-context";
 
@@ -8,7 +8,7 @@ const Todos: React.FC = () => {
     return (
         <ul className={classes.todos}>
             {todos.map(item => (
-                <TodoItem onRemoveHandler={removeTodo.bind(null, item.id)}
+                <TodoItemContainer onRemoveHandler={removeTodo.bind(null, item.id)}
                           onIsDoneHandler={isDone.bind(null, item.id)}
                           checked={item.checked}
                           text={item.text}

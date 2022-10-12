@@ -1,12 +1,9 @@
 import React from 'react';
 import classes from './TodoItem.module.css'
-import { Todo } from '../../models/Todo';
+import { ITodoContainer } from './TodoItemContainer'
 
+interface ITodo extends ITodoContainer {
 
-
-interface ITodo extends Todo {
-    onRemoveHandler: () => void;
-    onIsDoneHandler: () => void;
 }
 
 const TodoItem: React.FC<ITodo> = (props) => {
