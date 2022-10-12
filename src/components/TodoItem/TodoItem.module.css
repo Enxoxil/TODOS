@@ -6,7 +6,17 @@
     padding: 1rem;
     background-color: #f7f5ef;
 }
+.input {
+    display: block;
+    width: 100%;
+    font: inherit;
+    background-color: #f7f5ef;
+    border: none;
+}
 
+.input:active{
+    border: none;
+}
 .control {
     display: flex;
     justify-content: space-between;

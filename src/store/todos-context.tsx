@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Todo} from '../models/Todo';
 import {PropsWithChildren} from "react";
 
-type ContextTypeObj = {
+interface IContextTypeObj {
     todos: Todo[],
     addTodo: (text: string) => void,
     removeTodo: (id: string) => void,
@@ -11,7 +11,7 @@ type ContextTypeObj = {
     inputValue: string,
 }
 
-export const TodosContext = React.createContext<ContextTypeObj>({
+export const TodosContext = React.createContext<IContextTypeObj>({
     todos: [],
     addTodo: () => {
     },
@@ -22,7 +22,7 @@ export const TodosContext = React.createContext<ContextTypeObj>({
     inputEvent: () => {
     },
     inputValue: '',
-});
+})
 
 const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
 
@@ -32,7 +32,6 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
     const inputHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
         setEnteredValue(event.target.value);
     };
-
 
     const addTodosHandler = (text: string) => {
         const item = new Todo(text);
@@ -50,7 +49,7 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
             return todo;
         }))
     }
-    const contextValue: ContextTypeObj = {
+    const contextValue: IContextTypeObj = {
         todos,
         isDone: isDoneHandler,
         addTodo: addTodosHandler,
@@ -58,8 +57,11 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
         inputEvent: inputHandler,
         inputValue: enteredValue,
     }
-    return <TodosContext.Provider value={contextValue}>{props.children}
-    </TodosContext.Provider>
+    return (
+        <TodosContext.Provider value={contextValue}>
+            {props.children}
+        </TodosContext.Provider>
+    )
 }
 
 export default TodosContextProvider;

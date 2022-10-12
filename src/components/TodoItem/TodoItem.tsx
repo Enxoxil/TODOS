@@ -1,18 +1,23 @@
 import React from 'react';
 import classes from './TodoItem.module.css'
+import { Todo } from '../../models/Todo';
 
-interface ITodo {
-    text: string;
-    onRemoveHandler: () => void; // event: React.MouseEvent только если нужно использовать событие
+
+
+interface ITodo extends Todo {
+    onRemoveHandler: () => void;
     onIsDoneHandler: () => void;
-    checked: boolean;
 }
 
 const TodoItem: React.FC<ITodo> = (props) => {
 
     return (
         <div className={classes.item}>
-            <li>{props.text}</li>
+            {!props.edit && <li>{props.text}</li>}
+            {props.edit &&
+                <li >
+                </li>
+            }
 
             <div className={classes.control}>
                 <label htmlFor="isDone">Is Done</label>

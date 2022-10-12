@@ -1,18 +1,21 @@
 import React, {useContext} from 'react';
-import TodoItem from "./TodoItem";
+import TodoItem from "../TodoItem/TodoItem";
 import classes from "./Todos.module.css";
-import {TodosContext} from "../store/todos-context";
+import {TodosContext} from "../../store/todos-context";
 
 const Todos: React.FC = () => {
-    const todosCtx = useContext(TodosContext);
+    const {todos, removeTodo, isDone} = useContext(TodosContext);
     return (
         <ul className={classes.todos}>
-            {todosCtx.todos.map(item => (
-                <TodoItem onRemoveHandler={todosCtx.removeTodo.bind(null, item.id)}
-                          onIsDoneHandler={todosCtx.isDone.bind(null, item.id)}
+            {todos.map(item => (
+                <TodoItem onRemoveHandler={removeTodo.bind(null, item.id)}
+                          onIsDoneHandler={isDone.bind(null, item.id)}
                           checked={item.checked}
                           text={item.text}
-                          key={item.id}/>))}
+                          key={item.id}
+                          edit={item.edit}
+                          id={item.id}
+                />))}
         </ul>
     )
 };

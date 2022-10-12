@@ -1,26 +1,21 @@
 import React, {useContext, useRef} from 'react';
 import classes from './NewTodo.module.css';
-import {TodosContext} from "../../store/todos-context";
-import {Input} from "antd";
+import TextArea from "./TextArea";
 
-interface INewTodo {
-    formSubmitHandler: (event: React.FormEvent) => void,
-    onKeyDownHandler:(event: React.KeyboardEvent) => void,
+interface INewTodoProps {
+    formSubmit: (e: React.FormEvent) => void,
+    onKeyDownHandler: (e: React.KeyboardEvent) => void,
+    inputValue: string
 }
 
-const NewTodo: React.FC<INewTodo> = (props) => {
-    const {TextArea} = Input;
-    const todosCtx = useContext(TodosContext);
-    // const todoTextInputRef = useRef<HTMLInputElement>(null);
+const NewTodo: React.FC<INewTodoProps> = ({formSubmit, inputValue, onKeyDownHandler}) => {
 
     return (
         <>
-            <form onSubmit={props.formSubmitHandler} className={classes.form}>
-                <label htmlFor='text'>Please enter TODO text</label>
-                {/*<input type='text' id='text' ref={todoTextInputRef} value={todosCtx.inputValue} onChange={todosCtx.inputEvent}/>*/}
-                {/*<input type='text' id='text' value={todosCtx.inputValue} onChange={todosCtx.inputEvent}/>*/}
-                <TextArea placeholder='Please, enter your TODO. (shift + enter = add todo).' allowClear autoSize={{ maxRows: 1}}
-                          value={todosCtx.inputValue} onChange={todosCtx.inputEvent} onKeyDown={props.onKeyDownHandler} />
+            <form onSubmit={formSubmit} className={classes.form}>
+                <label htmlFor='text'> shift + enter = add todo</label>
+
+                <TextArea onKeyDownHandler={onKeyDownHandler}/>
                 <button type='submit'>Add TODO</button>
             </form>
         </>

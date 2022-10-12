@@ -1,20 +1,19 @@
 import React, {useContext} from 'react';
-import {TodosContext} from "../../store/todos-context";
 import NewTodo from "./NewTodo";
+import {TodosContext} from "../../store/todos-context";
 
-const NewTodoContainer = () => {
+const NewTodoContainer: React.FC = () => {
+    const {inputValue, addTodo} = useContext(TodosContext)
 
-    const todosCtx = useContext(TodosContext);
-
-    const formSubmitHandler = (event: React.FormEvent) => {
+    const formSubmitHandler: React.FormEventHandler = (event) => {
         event.preventDefault();
         // const enteredText = todoTextInputRef.current!.value
-        const enteredText = todosCtx.inputValue;
-        if (enteredText.trim().length === 0) {
+        if (inputValue.trim().length === 0) {
             //TODO throw error
+            console.log('Entered value = 0')
             return;
         }
-        todosCtx.addTodo(enteredText);
+        addTodo(inputValue);
         // todoTextInputRef.current!.value = '';
     }
 
@@ -24,12 +23,10 @@ const NewTodoContainer = () => {
         }
     }
 
+
     return (
         <>
-            <NewTodo
-                onKeyDownHandler={onKeyDownHandler}
-                formSubmitHandler={formSubmitHandler}
-            />
+            <NewTodo formSubmit={formSubmitHandler} inputValue={inputValue} onKeyDownHandler={onKeyDownHandler}/>
         </>
     )
 };
