@@ -14,8 +14,8 @@ interface ITodo extends ITodoContainer {
 const TodoItem: React.FC<ITodo> = (props) => {
 
     return (
-        <div className={classes.item}>
-            {!props.editMode && <li onDoubleClick={props.onEditActivateHandler}>{props.text}</li>}
+        <div onDoubleClick={props.onEditActivateHandler} className={classes.item}>
+            {!props.editMode && <li>{props.text}</li>}
             {props.editMode &&
                 <li>
                     <form onSubmit={props.onSubmitHandler}>
