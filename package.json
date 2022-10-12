@@ -18,7 +18,7 @@
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://github.com/Enxoxil/TODO-List",
+  "homepage": ".",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

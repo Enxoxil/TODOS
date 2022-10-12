@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import classes from './TodoItem.module.css'
 import {ITodoContainer} from './TodoItemContainer'
 import {Input} from "antd";
@@ -11,20 +11,21 @@ interface ITodo extends ITodoContainer {
     todoText: string,
 }
 
-const TodoItem: React.FC<ITodo> = (props) => {
+const TodoItem: React.FC<ITodo> = React.memo((props) => {
 
     return (
-        <div onDoubleClick={props.onEditActivateHandler} className={classes.item}>
-            {!props.editMode && <li>{props.text}</li>}
-            {props.editMode &&
-                <li>
-                    <form onSubmit={props.onSubmitHandler}>
-                        <Input allowClear onChange={props.onEditHandler}
-                               value={props.todoText}/>
-                    </form>
-                </li>
-            }
-
+        <div className={classes.item}>
+            <div onDoubleClick={props.onEditActivateHandler}>
+                {!props.editMode && <li>{props.text}</li>}
+                {props.editMode &&
+                    <li>
+                        <form onSubmit={props.onSubmitHandler}>
+                            <Input allowClear onChange={props.onEditHandler}
+                                   value={props.todoText}/>
+                        </form>
+                    </li>
+                }
+            </div>
             <div className={classes.control}>
                 <label htmlFor="isDone">Is Done</label>
                 <input onChange={props.onIsDoneHandler} type="checkbox" checked={props.checked} value='IsDone'
@@ -33,6 +34,6 @@ const TodoItem: React.FC<ITodo> = (props) => {
             </div>
         </div>
     )
-};
+});
 
 export default TodoItem;

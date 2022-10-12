@@ -8,16 +8,18 @@ export interface ITodoContainer extends Todo {
     onIsDoneHandler: () => void;
 }
 
-const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
+const TodoItemContainer: React.FC<ITodoContainer> = React.memo((props) => {
     const {editTodo} = useContext(TodosContext);
     const [editMode, setEditMode] = useState(props.edit);
     const [todoText, setTodoText] = useState(props.text)
     const onEditActivateHandler = () => {
         setEditMode(!editMode);
+        console.log(todoText)
     }
     const onEditHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-        setTodoText(e.target.value);
-        console.log(todoText)
+        if (e.target.value !== '') {
+            setTodoText(e.target.value);
+        }
     }
 
     const onSubmitHandler: React.FormEventHandler = (e) => {
@@ -32,6 +34,6 @@ const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
             />
         </>
     )
-};
+});
 
 export default TodoItemContainer;
