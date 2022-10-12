@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Enxoxil/TODO-List/static/css/main.2971603f.css",
-    "main.js": "/Enxoxil/TODO-List/static/js/main.892028eb.js",
-    "index.html": "/Enxoxil/TODO-List/index.html",
-    "main.2971603f.css.map": "/Enxoxil/TODO-List/static/css/main.2971603f.css.map",
-    "main.892028eb.js.map": "/Enxoxil/TODO-List/static/js/main.892028eb.js.map"
+    "main.css": "/Enxoxil/TODOS/static/css/main.90489d0d.css",
+    "main.js": "/Enxoxil/TODOS/static/js/main.f6ce6392.js",
+    "index.html": "/Enxoxil/TODOS/index.html",
+    "main.90489d0d.css.map": "/Enxoxil/TODOS/static/css/main.90489d0d.css.map",
+    "main.f6ce6392.js.map": "/Enxoxil/TODOS/static/js/main.f6ce6392.js.map"
   },
   "entrypoints": [
-    "static/css/main.2971603f.css",
-    "static/js/main.892028eb.js"
+    "static/css/main.90489d0d.css",
+    "static/js/main.f6ce6392.js"
   ]
 }
