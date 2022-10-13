@@ -7,14 +7,13 @@ const NewTodoContainer: React.FC = () => {
 
     const formSubmitHandler: React.FormEventHandler = (event) => {
         event.preventDefault();
-        // const enteredText = todoTextInputRef.current!.value
         if (inputValue.trim().length === 0) {
             //TODO throw error
             console.log('Entered value = 0')
             return;
         }
         addTodo(inputValue);
-        // todoTextInputRef.current!.value = '';
+
     }
 
     const onKeyDownHandler: React.KeyboardEventHandler = (event) => {

@@ -13,7 +13,7 @@ const TextArea: React.FC<IProps> = ({onKeyDownHandler}) => {
     return (
         <>
             <TextArea className={classes.textarea}
-                      placeholder='Please, enter your TODO.' allowClear autoSize={{maxRows: 1}}
+                      placeholder='Please, enter your TODO.' allowClear autoSize={{maxRows: 3}}
                       value={inputValue} onChange={inputEvent} onKeyDown={onKeyDownHandler}
             />
         </>
