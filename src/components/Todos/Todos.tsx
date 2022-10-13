@@ -17,9 +17,7 @@ const Todos: React.FC = () => {
                                           id={item.id}
                 />
             })}
-            {inputValue && todos.filter((item) => {
-                item.text.includes(inputValue)
-            })}
+
         </ul>
     )
 };
