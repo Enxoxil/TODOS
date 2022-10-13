@@ -8,7 +8,7 @@ export interface ITodoContainer extends Todo {
     onIsDoneHandler: () => void;
 }
 
-const TodoItemContainer: React.FC<ITodoContainer> = React.memo((props) => {
+const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
     const {editTodo} = useContext(TodosContext);
     const [editMode, setEditMode] = useState(props.edit);
     const [todoText, setTodoText] = useState(props.text)
@@ -34,6 +34,6 @@ const TodoItemContainer: React.FC<ITodoContainer> = React.memo((props) => {
             />
         </>
     )
-});
+};
 
 export default TodoItemContainer;

@@ -5,6 +5,8 @@ import {TodosContext} from "../../store/todos-context";
 
 const Todos: React.FC = () => {
     const {inputValue, todos, removeTodo, isDone} = useContext(TodosContext);
+    const filteredTodos = todos.filter((item) => item.text.includes(inputValue));
+
     return (
         <ul className={classes.todos}>
             {!inputValue && todos.map(item => {
@@ -17,7 +19,16 @@ const Todos: React.FC = () => {
                                           id={item.id}
                 />
             })}
-
+            {inputValue && filteredTodos.map(item => {
+                return <TodoItemContainer onRemoveHandler={removeTodo.bind(null, item.id)}
+                                          onIsDoneHandler={isDone.bind(null, item.id)}
+                                          checked={item.checked}
+                                          text={item.text}
+                                          key={item.id}
+                                          edit={item.edit}
+                                          id={item.id}
+                />
+            })}
         </ul>
     )
 };
