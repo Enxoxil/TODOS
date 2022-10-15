@@ -55,14 +55,29 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
         }))
     }
 
+    // const isDoneHandler = (id: string) => {
+    //     setTodos(todos.map((item) => {
+    //         if(item.id === id){
+    //             item.checked = !item.checked
+    //         }
+    //         return item;
+    //     }))
+    // }
+
     const isDoneHandler = (id: string) => {
-        setTodos(todos.map((item) => {
+        const newTodos = todos.map((item) => {
             if(item.id === id){
                 item.checked = !item.checked
             }
             return item;
-        }))
+        })
+
+        const isDoneTodos = newTodos.filter((todo) => todo.checked).reverse();
+        const isNotDoneTodos = newTodos.filter(((todo) => !todo.checked)).reverse();
+
+        setTodos([...isNotDoneTodos, ...isDoneTodos])
     }
+
 
     const contextValue: IContextTypeObj = {
         todos,
