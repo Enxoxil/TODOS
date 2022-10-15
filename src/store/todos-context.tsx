@@ -23,7 +23,8 @@ export const TodosContext = React.createContext<IContextTypeObj>({
     inputEvent: () => {
     },
     inputValue: '',
-    editTodo: () => {},
+    editTodo: () => {
+    },
 })
 
 const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
@@ -40,13 +41,14 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
         setTodos([...todos, item])
         setEnteredValue('')
     };
+
     const removeTodoHandler = (id: string) => {
         setTodos(todos.filter((todo) => todo.id !== id))
     };
 
     const editTodoTextHandler = (id: string, newTodoText: string) => {
         setTodos(todos.map((todo) => {
-            if (todo.id === id){
+            if (todo.id === id) {
                 todo.text = newTodoText;
             }
             return todo;
@@ -54,13 +56,14 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
     }
 
     const isDoneHandler = (id: string) => {
-        setTodos(todos.map((todo) => {
-            if (todo.id === id) {
-                todo.checked = !todo.checked;
+        setTodos(todos.map((item) => {
+            if(item.id === id){
+                item.checked = !item.checked
             }
-            return todo;
+            return item;
         }))
     }
+
     const contextValue: IContextTypeObj = {
         todos,
         isDone: isDoneHandler,
@@ -70,6 +73,7 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
         inputValue: enteredValue,
         editTodo: editTodoTextHandler,
     }
+
     return (
         <TodosContext.Provider value={contextValue}>
             {props.children}

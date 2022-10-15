@@ -1,15 +1,7 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import classes from './TodoItem.module.css'
-import {ITodoContainer} from './TodoItemContainer'
+import {ITodo} from "./Types/ITodo";
 import {Input} from "antd";
-
-interface ITodo extends ITodoContainer {
-    onEditHandler: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    onEditActivateHandler: () => void,
-    onSubmitHandler: (e: React.FormEvent) => void,
-    editMode: boolean,
-    todoText: string,
-}
 
 const TodoItem: React.FC<ITodo> = React.memo((props) => {
 

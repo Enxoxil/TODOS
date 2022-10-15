@@ -1,12 +1,9 @@
 import React, {useContext, useState} from 'react';
-import {Todo} from "../../models/Todo";
+import {ITodoContainer} from "./Types/ITodoContainer";
 import TodoItem from "./TodoItem";
 import {TodosContext} from "../../store/todos-context";
 
-export interface ITodoContainer extends Todo {
-    onRemoveHandler: () => void;
-    onIsDoneHandler: () => void;
-}
+
 
 const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
     const {editTodo} = useContext(TodosContext);

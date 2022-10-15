@@ -1,14 +1,10 @@
 import React, {useContext, useRef} from 'react';
 import classes from './NewTodo.module.css';
 import TextArea from "./TextArea";
+import {INewTodo} from "./Types/INewTodo";
 
-interface INewTodoProps {
-    formSubmit: (e: React.FormEvent) => void,
-    onKeyDownHandler: (e: React.KeyboardEvent) => void,
-    inputValue: string
-}
 
-const NewTodo: React.FC<INewTodoProps> = ({formSubmit, inputValue, onKeyDownHandler}) => {
+const NewTodo: React.FC<INewTodo> = ({formSubmit, inputValue, onKeyDownHandler}) => {
 
     return (
         <>

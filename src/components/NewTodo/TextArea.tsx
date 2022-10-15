@@ -2,12 +2,9 @@ import React, {useContext} from 'react';
 import {Input} from "antd";
 import {TodosContext} from "../../store/todos-context";
 import classes from './NewTodo.module.css'
+import {ITextArea} from "./Types/ITextArea";
 
-interface IProps {
-    onKeyDownHandler: (e: React.KeyboardEvent) => void;
-}
-
-const TextArea: React.FC<IProps> = ({onKeyDownHandler}) => {
+const TextArea: React.FC<ITextArea> = ({onKeyDownHandler}) => {
     const {TextArea} = Input;
     const {inputEvent, inputValue} = useContext(TodosContext)
     return (
