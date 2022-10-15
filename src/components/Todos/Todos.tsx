@@ -10,23 +10,21 @@ const Todos: React.FC = () => {
     return (
         <ul className={classes.todos}>
             {!inputValue && todos.map(item => {
-                return <TodoItemContainer onRemoveHandler={removeTodo.bind(null, item.id)}
-                                          onIsDoneHandler={isDone.bind(null, item.id)}
+                return <TodoItemContainer onRemoveHandler={removeTodo.bind(null, item.id!)}
+                                          onIsDoneHandler={isDone.bind(null, item.id!)}
                                           checked={item.checked}
                                           text={item.text}
                                           key={item.id}
                                           edit={item.edit}
-                                          id={item.id}
                 />
             })}
             {inputValue && filteredTodos.map(item => {
-                return <TodoItemContainer onRemoveHandler={removeTodo.bind(null, item.id)}
-                                          onIsDoneHandler={isDone.bind(null, item.id)}
+                return <TodoItemContainer onRemoveHandler={removeTodo.bind(null, item.id!)}
+                                          onIsDoneHandler={isDone.bind(null, item.id!)}
                                           checked={item.checked}
                                           text={item.text}
                                           key={item.id}
                                           edit={item.edit}
-                                          id={item.id}
                 />
             })}
         </ul>

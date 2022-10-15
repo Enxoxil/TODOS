@@ -1,7 +1,7 @@
 
 export class Todo {
   text: string;
-  id: string;
+  id?: string;
   checked: boolean;
   edit: boolean;
   constructor(enteredItem: string) {
