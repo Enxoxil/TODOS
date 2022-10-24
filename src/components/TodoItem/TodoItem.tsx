@@ -18,22 +18,28 @@ const TodoItem: FC<ITodo> = (props) => {
 
     return (
         <div className={classes.item}>
+            <div className={classes.control}>
+                <div className={classes.box}>
+                    <label htmlFor="isDone">Is Done</label>
+                    <input onChange={props.onIsDoneHandler} type="checkbox" checked={props.checked} value='IsDone'
+                           id='isDone'/>
+                </div>
+
+                <button className={classes.controlButton} onClick={props.onRemoveHandler}>X</button>
+            </div>
             <div onDoubleClick={props.onEditActivateHandler}>
                 {!props.editMode && <li>{props.text}</li>}
                 {props.editMode &&
                     <li>
                         <form onSubmit={props.onSubmitHandler}>
-                            <Input ref={inputRef} allowClear onChange={props.onEditHandler} onBlur={props.onBlurHandler}
+                            <Input ref={inputRef} allowClear onChange={props.onEditHandler}
+                                   onBlur={props.onBlurHandler}
                                    value={props.todoText}/>
                         </form>
                     </li>
                 }
-            </div>
-            <div className={classes.control}>
-                <label htmlFor="isDone">Is Done</label>
-                <input onChange={props.onIsDoneHandler} type="checkbox" checked={props.checked} value='IsDone'
-                       id='isDone'/>
-                <button onClick={props.onRemoveHandler}>X</button>
+
+
             </div>
         </div>
     )

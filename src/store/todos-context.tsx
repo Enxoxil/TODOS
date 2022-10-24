@@ -73,7 +73,7 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
         })
 
         const isDoneTodos = newTodos.filter((todo) => todo.checked).reverse();
-        const isNotDoneTodos = newTodos.filter(((todo) => !todo.checked)).reverse();
+        const isNotDoneTodos = newTodos.filter(((todo) => !todo.checked));
 
         setTodos([...isNotDoneTodos, ...isDoneTodos])
     }
