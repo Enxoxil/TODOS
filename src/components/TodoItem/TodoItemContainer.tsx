@@ -3,20 +3,26 @@ import {ITodoContainer} from "./Types/ITodoContainer";
 import TodoItem from "./TodoItem";
 import {TodosContext} from "../../store/todos-context";
 
-
-
 const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
     const {editTodo} = useContext(TodosContext);
     const [editMode, setEditMode] = useState(props.edit);
-    const [todoText, setTodoText] = useState(props.text)
+    const [todoText, setTodoText] = useState(props.text);
+
     const onEditActivateHandler = () => {
         setEditMode(!editMode);
-        console.log(todoText)
     }
     const onEditHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         if (e.target.value !== '') {
             setTodoText(e.target.value);
         }
+    }
+
+    const onBlurHandler: React.FocusEventHandler<HTMLInputElement> = (e) => {
+        if (e.target.value !== '') {
+            setTodoText(e.target.value);
+        }
+        console.log(e)
+        setEditMode(!editMode);
     }
 
     const onSubmitHandler: React.FormEventHandler = (e) => {
@@ -27,7 +33,7 @@ const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
     return (
         <>
             <TodoItem editMode={editMode} todoText={todoText} onEditActivateHandler={onEditActivateHandler}
-                      onEditHandler={onEditHandler} onSubmitHandler={onSubmitHandler} {...props}
+                      onEditHandler={onEditHandler} onBlurHandler={onBlurHandler} onSubmitHandler={onSubmitHandler} {...props}
             />
         </>
     )

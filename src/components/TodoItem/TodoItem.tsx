@@ -1,9 +1,20 @@
-import React from 'react';
+import React, {useRef, forwardRef, memo, FC, useImperativeHandle, useEffect} from 'react';
 import classes from './TodoItem.module.css'
 import {ITodo} from "./Types/ITodo";
 import {Input} from "antd";
+import type {InputRef} from 'antd';
 
-const TodoItem: React.FC<ITodo> = React.memo((props) => {
+const TodoItem: FC<ITodo> = (props) => {
+    const inputRef = useRef<InputRef>(null);
+
+    useEffect(() => {
+        if (props.editMode) {
+            inputRef!.current!.focus({
+                cursor: 'end'
+            });
+        }
+    }, [props.editMode])
+
 
     return (
         <div className={classes.item}>
@@ -12,7 +23,7 @@ const TodoItem: React.FC<ITodo> = React.memo((props) => {
                 {props.editMode &&
                     <li>
                         <form onSubmit={props.onSubmitHandler}>
-                            <Input allowClear onChange={props.onEditHandler}
+                            <Input ref={inputRef} allowClear onChange={props.onEditHandler} onBlur={props.onBlurHandler}
                                    value={props.todoText}/>
                         </form>
                     </li>
@@ -26,6 +37,6 @@ const TodoItem: React.FC<ITodo> = React.memo((props) => {
             </div>
         </div>
     )
-});
+};
 
 export default TodoItem;
