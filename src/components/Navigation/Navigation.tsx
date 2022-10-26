@@ -3,7 +3,6 @@ import {NavLink} from "react-router-dom";
 
 const Navigation: FC = (props) => {
     return (
-        <>
             <nav>
                 <ul>
                     <li><NavLink to='/home'>Home</NavLink></li>
@@ -11,7 +10,6 @@ const Navigation: FC = (props) => {
                     <li><NavLink to='/admin'>Admin</NavLink></li>
                 </ul>
             </nav>
-        </>
     )
 };
 
