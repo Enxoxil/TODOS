@@ -9,13 +9,27 @@ import Navigation from "./components/Navigation/Navigation";
 import ProtectedRoute from "./Helpers/ProtectedRoute";
 
 
+export interface IUser {
+    id: number,
+    name: string,
+    role: string,
+    permissions: string,
+    login: boolean,
+}
+
 const App = () => {
-    const [user, setUser] = useState(false);
+    const [user, setUser] = useState<IUser>();
     const handleLogin = () => {
-        setUser(true);
+        setUser({
+            id: 1,
+            name: 'Yehor',
+            permissions: 'admin',
+            role: 'admin',
+            login: true
+        });
     }
     const handleLogout = () => {
-        setUser(false);
+        setUser({...user!, login: false});
     }
 
     return (
@@ -23,7 +37,7 @@ const App = () => {
             <BrowserRouter>
                 <Navigation/>
 
-                {user ? (
+                {user!.login ? (
                     <button onClick={handleLogout}>Sign out</button>
                 ) : (
                     <button onClick={handleLogin}>Sign in</button>
@@ -34,7 +48,7 @@ const App = () => {
                     <Route path='home' element={'Home'}/>
                     <Route path='auth' element={'Auth'}/>
                     <Route path='todos' element={
-                        <ProtectedRoute user={user}>
+                        <ProtectedRoute user={user!}>
                             <_PageHeader/>
                             <NewTodoContainer/>
                             <Todos/>
