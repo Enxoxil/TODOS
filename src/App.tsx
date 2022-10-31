@@ -35,12 +35,8 @@ const App = () => {
     return (
         <TodosContextProvider>
             <BrowserRouter>
-                <Navigation/>
-                {user! && user!.login ? (
-                    <button onClick={handleLogout}>Sign out</button>
-                ) : (
-                    <button onClick={handleLogin}>Sign in</button>
-                )}
+                <Navigation user={user!} handleLogout={handleLogout} handleLogin={handleLogin}/>
+
 
                 <Routes>
                     <Route index element={'Home'}/>

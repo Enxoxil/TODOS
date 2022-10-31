@@ -1,0 +1,37 @@
+.todoNavigate {
+    margin: 0 auto;
+    padding: 5px 15px 5px 15px;
+}
+
+.todoNavigate__Wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+}
+
+.todoNavigate__itemWrapper{
+    padding: 0 5px;
+}
+
+.todoNavigate__item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 35px;
+    background-color: #89def8;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+}
+
+.todoNavigate__item:hover{
+    transition: all .2s ease-in ;
+    transform: scale(120%);
+    background-color: #fff;
+    color: #89def8;
+}
+
+
