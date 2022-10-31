@@ -1,17 +1,16 @@
 import React, {FC} from 'react';
 import {Navigate, Outlet} from "react-router-dom";
-import {IUser} from '../App'
 
 interface IProtectedRoute {
-    user: IUser,
+    isAllowed: boolean,
     redirectPath?: string,
     children?: React.ReactElement | React.ReactElement[],
 }
 
-const ProtectedRoute: FC<IProtectedRoute> = ({user, redirectPath = '/auth', children}) => {
+const ProtectedRoute: FC<IProtectedRoute> = ({isAllowed, redirectPath = '/auth', children}) => {
 
-    if (!user.login) return <Navigate to={redirectPath} replace/>;
-
+    if (!isAllowed) return <Navigate to={redirectPath} replace/>;
+    console.log(isAllowed)
     return children ? <>{children}</> : <Outlet/>;
 
 };

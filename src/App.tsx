@@ -13,7 +13,7 @@ export interface IUser {
     id: number,
     name: string,
     role: string,
-    permissions: string,
+    permissions: string[],
     login: boolean,
 }
 
@@ -23,7 +23,7 @@ const App = () => {
         setUser({
             id: 1,
             name: 'Yehor',
-            permissions: 'admin',
+            permissions: ['admin'],
             role: 'admin',
             login: true
         });
@@ -31,13 +31,12 @@ const App = () => {
     const handleLogout = () => {
         setUser({...user!, login: false});
     }
-
+    console.log(user)
     return (
         <TodosContextProvider>
             <BrowserRouter>
                 <Navigation/>
-
-                {user!.login ? (
+                {user! && user!.login ? (
                     <button onClick={handleLogout}>Sign out</button>
                 ) : (
                     <button onClick={handleLogin}>Sign in</button>
@@ -48,7 +47,7 @@ const App = () => {
                     <Route path='home' element={'Home'}/>
                     <Route path='auth' element={'Auth'}/>
                     <Route path='todos' element={
-                        <ProtectedRoute user={user!}>
+                        <ProtectedRoute isAllowed={user?.login! && user!.permissions.includes('admin')}>
                             <_PageHeader/>
                             <NewTodoContainer/>
                             <Todos/>
