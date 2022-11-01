@@ -28,12 +28,13 @@
 }
 
 .todoNavigate__item:focus{
-    border: 2px solid black;
+    border: none;
+    box-shadow: 0 0 2px 2px #89def8 ;
 }
 
 .todoNavigate__item:hover{
     transition: all .2s ease-in ;
-    transform: scale(120%);
+    transform: scale(110%);
     background-color: #fff;
     color: #89def8;
 }

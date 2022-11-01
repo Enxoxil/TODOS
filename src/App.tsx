@@ -40,8 +40,8 @@ const App = () => {
 
                 <Routes>
                     <Route index element={'Home'}/>
-                    <Route path='home' element={'Home'}/>
-                    <Route path='auth' element={'Auth'}/>
+                    <Route path='home' element={<p style={{textAlign: 'center'}}>Тут будет компонент HOME</p>}/>
+                    <Route path='auth' element={<p style={{textAlign: 'center'}}>Тут будет компонент AUTH</p>}/>
                     <Route path='todos' element={
                         <ProtectedRoute isAllowed={user?.login! && user!.permissions.includes('admin')}>
                             <_PageHeader/>
@@ -49,10 +49,9 @@ const App = () => {
                             <Todos/>
                         </ProtectedRoute>
                     }/>
-                    <Route path='admin' element={'Admin'}/>
+                    <Route path='admin' element={<p style={{textAlign: 'center'}}>Тут будет компонент ADMIN</p>}/>
                     <Route path='*' element={'404'}/>
                 </Routes>
-
             </BrowserRouter>
         </TodosContextProvider>
     );
