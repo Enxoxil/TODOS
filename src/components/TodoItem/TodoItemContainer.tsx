@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {ITodoContainer} from "./Types/ITodoContainer";
 import TodoItem from "./TodoItem";
-import {TodosContext} from "../../store/todos-context";
+import {TodosContext} from "../../BLL/todos-context";
 
 const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
     const {editTodo} = useContext(TodosContext);

@@ -1,7 +1,6 @@
 import './App.css';
 import Todos from "./components/Todos/Todos";
 import NewTodoContainer from "./components/NewTodo/NewTodoContainer";
-import TodosContextProvider from "./store/todos-context";
 import _PageHeader from "./components/PageHeader/_PageHeader";
 import {Route, Routes, BrowserRouter} from "react-router-dom";
 import {useState} from "react";
@@ -19,6 +18,7 @@ export interface IUser {
 
 const App = () => {
     const [user, setUser] = useState<IUser>();
+
     const handleLogin = () => {
         setUser({
             id: 1,
@@ -33,27 +33,24 @@ const App = () => {
     }
     console.log(user)
     return (
-        <TodosContextProvider>
-            <BrowserRouter>
-                <Navigation user={user!} handleLogout={handleLogout} handleLogin={handleLogin}/>
+        <>
+            <Navigation user={user!} handleLogout={handleLogout} handleLogin={handleLogin}/>
 
-
-                <Routes>
-                    <Route index element={'Home'}/>
-                    <Route path='home' element={<p style={{textAlign: 'center'}}>Тут будет компонент HOME</p>}/>
-                    <Route path='auth' element={<p style={{textAlign: 'center'}}>Тут будет компонент AUTH</p>}/>
-                    <Route path='todos' element={
-                        <ProtectedRoute isAllowed={user?.login! && user!.permissions.includes('admin')}>
-                            <_PageHeader/>
-                            <NewTodoContainer/>
-                            <Todos/>
-                        </ProtectedRoute>
-                    }/>
-                    <Route path='admin' element={<p style={{textAlign: 'center'}}>Тут будет компонент ADMIN</p>}/>
-                    <Route path='*' element={'404'}/>
-                </Routes>
-            </BrowserRouter>
-        </TodosContextProvider>
+            <Routes>
+                <Route index element={'Home'}/>
+                <Route path='home' element={<p style={{textAlign: 'center'}}>Тут будет компонент HOME</p>}/>
+                <Route path='auth' element={<p style={{textAlign: 'center'}}>Тут будет компонент AUTH</p>}/>
+                <Route path='todos' element={
+                    <ProtectedRoute isAllowed={user?.login! && user!.permissions.includes('admin')}>
+                        <_PageHeader/>
+                        <NewTodoContainer/>
+                        <Todos/>
+                    </ProtectedRoute>
+                }/>
+                <Route path='admin' element={<p style={{textAlign: 'center'}}>Тут будет компонент ADMIN</p>}/>
+                <Route path='*' element={'404'}/>
+            </Routes>
+        </>
     );
 }
 

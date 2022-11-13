@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import NewTodo from "./NewTodo";
-import {TodosContext} from "../../store/todos-context";
+import {TodosContext} from "../../BLL/todos-context";
 
 const NewTodoContainer: React.FC = () => {
     const {inputValue, addTodo} = useContext(TodosContext)

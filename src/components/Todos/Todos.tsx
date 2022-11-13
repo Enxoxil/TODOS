@@ -1,7 +1,7 @@
 import React, {FC, useContext} from 'react';
 import TodoItemContainer from "../TodoItem/TodoItemContainer";
 import classes from "./Todos.module.css";
-import {TodosContext} from "../../store/todos-context";
+import {TodosContext} from "../../BLL/todos-context";
 
 const Todos: FC = () => {
     const {inputValue, todos, removeTodo, isDone} = useContext(TodosContext);

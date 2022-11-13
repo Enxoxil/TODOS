@@ -1,7 +1,7 @@
 import React, {useContext, FC} from 'react';
 import {PageHeader} from "antd";
 import classes from './_PageHeader.module.css';
-import {TodosContext} from "../../store/todos-context";
+import {TodosContext} from "../../BLL/todos-context";
 
 const _PageHeader: FC = () => {
     const {todos} = useContext(TodosContext);
