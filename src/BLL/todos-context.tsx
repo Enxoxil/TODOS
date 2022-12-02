@@ -48,20 +48,22 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
 
     const editTodoTextHandler = (id: string, newTodoText: string) => {
         setTodos(todos.map((todo) => {
-            if (todo.id === id) {
-                todo.text = newTodoText;
+            if (todo.id !== id) return todo;
+            return {
+                ...todo,
+                text: newTodoText,
             }
-            return todo;
+
         }))
     }
 
-
     const isDoneHandler = (id: string) => {
         const newTodos = todos.map((item) => {
-            if(item.id === id){
-                item.checked = !item.checked
+            if (item.id !== id) return item;
+            return {
+                ...item,
+                checked: !item.checked,
             }
-            return item;
         })
 
         const isDoneTodos = newTodos.filter((todo) => todo.checked).reverse();

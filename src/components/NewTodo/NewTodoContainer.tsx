@@ -7,9 +7,9 @@ const NewTodoContainer: React.FC = () => {
 
     const formSubmitHandler: React.FormEventHandler = (event) => {
         event.preventDefault();
-        if (inputValue.trim().length === 0) {
+        if (!inputValue.trim().length) {
             //TODO throw error
-            console.log('Entered value = 0')
+            console.log('Entered value is empty')
             return;
         }
         addTodo(inputValue);

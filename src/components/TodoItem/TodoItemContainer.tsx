@@ -19,9 +19,8 @@ const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
 
     const onBlurHandler: React.FocusEventHandler<HTMLInputElement> = (e) => {
         if (e.target.value !== '') {
-            setTodoText(e.target.value);
+            editTodo(props.id, e.target.value);
         }
-        console.log(e)
         setEditMode(!editMode);
     }
 

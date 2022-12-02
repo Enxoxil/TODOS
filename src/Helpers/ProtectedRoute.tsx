@@ -10,7 +10,6 @@ interface IProtectedRoute {
 const ProtectedRoute: FC<IProtectedRoute> = ({isAllowed, redirectPath = '/auth', children}) => {
 
     if (!isAllowed) return <Navigate to={redirectPath} replace/>;
-    console.log(isAllowed)
     return children ? <>{children}</> : <Outlet/>;
 
 };

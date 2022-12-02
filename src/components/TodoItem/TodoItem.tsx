@@ -6,6 +6,17 @@ import type {InputRef} from 'antd';
 
 const TodoItem: FC<ITodo> = (props) => {
     const inputRef = useRef<InputRef>(null);
+    const {checked,
+        text,
+        todoText,
+        editMode,
+        onEditHandler,
+        onSubmitHandler,
+        onBlurHandler,
+        onIsDoneHandler,
+        onRemoveHandler,
+        onEditActivateHandler
+    } = props;
 
     useEffect(() => {
         if (props.editMode) {
@@ -21,20 +32,20 @@ const TodoItem: FC<ITodo> = (props) => {
             <div className={classes.control}>
                 <div className={classes.box}>
                     <label htmlFor="isDone">Is Done</label>
-                    <input onChange={props.onIsDoneHandler} type="checkbox" checked={props.checked} value='IsDone'
+                    <input onChange={onIsDoneHandler} type="checkbox" checked={checked} value='IsDone'
                            id='isDone'/>
                 </div>
 
-                <button className={classes.controlButton} onClick={props.onRemoveHandler}>X</button>
+                <button className={classes.controlButton} onClick={onRemoveHandler}>X</button>
             </div>
-            <div onDoubleClick={props.onEditActivateHandler}>
-                {!props.editMode && <li>{props.text}</li>}
-                {props.editMode &&
+            <div onDoubleClick={onEditActivateHandler}>
+                {!editMode && <li>{text}</li>}
+                {editMode &&
                     <li>
-                        <form onSubmit={props.onSubmitHandler}>
-                            <Input ref={inputRef} allowClear onChange={props.onEditHandler}
-                                   onBlur={props.onBlurHandler}
-                                   value={props.todoText}/>
+                        <form onSubmit={onSubmitHandler}>
+                            <Input ref={inputRef} allowClear onChange={onEditHandler}
+                                   onBlur={onBlurHandler}
+                                   value={todoText}/>
                         </form>
                     </li>
                 }
