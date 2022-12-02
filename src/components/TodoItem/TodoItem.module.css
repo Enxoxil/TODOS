@@ -5,7 +5,11 @@
     padding: 1rem;
     background-color: #f7f5ef;
     min-height: 65px;
+    border-radius: 10px;
+}
 
+.item.checked{
+    background-color: rgba(218, 78, 96, 0.47);
 }
 .input {
     display: block;

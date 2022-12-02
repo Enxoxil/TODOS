@@ -15,7 +15,8 @@ const TodoItem: FC<ITodo> = (props) => {
         onBlurHandler,
         onIsDoneHandler,
         onRemoveHandler,
-        onEditActivateHandler
+        onEditActivateHandler,
+        id,
     } = props;
 
     useEffect(() => {
@@ -28,12 +29,12 @@ const TodoItem: FC<ITodo> = (props) => {
 
 
     return (
-        <div className={classes.item}>
+        <div className={checked ? `${classes.item} ${classes.checked}`: classes.item}>
             <div className={classes.control}>
                 <div className={classes.box}>
-                    <label htmlFor="isDone">Is Done</label>
+                    <label htmlFor={id}>Is Done</label>
                     <input onChange={onIsDoneHandler} type="checkbox" checked={checked} value='IsDone'
-                           id='isDone'/>
+                           id={id}/>
                 </div>
 
                 <button className={classes.controlButton} onClick={onRemoveHandler}>X</button>
