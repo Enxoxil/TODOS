@@ -7,6 +7,7 @@ import {removeTodo, isDone} from "../../BLL/todo-slice/todo-slice";
 const Todos: FC = () => {
 
     const {todos} = useRootSelector((state) => state.todosReducer);
+    const {inputValue} = useRootSelector(state => state.inputReducer)
 
     const getFilteredTodos = () => {
         if (!inputValue) return todos;
