@@ -1,10 +1,12 @@
 import React, {FC, useContext} from 'react';
 import TodoItemContainer from "../TodoItem/TodoItemContainer";
 import classes from "./Todos.module.css";
-import {TodosContext} from "../../BLL/todos-context";
+import {useRootSelector} from '../../BLL/BLL_helpers/hooks';
+import {removeTodo, isDone} from "../../BLL/todo-slice/todo-slice";
 
 const Todos: FC = () => {
-    const {inputValue, todos, removeTodo, isDone} = useContext(TodosContext);
+
+    const {todos} = useRootSelector((state) => state.todosReducer);
 
     const getFilteredTodos = () => {
         if (!inputValue) return todos;

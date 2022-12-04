@@ -7,7 +7,6 @@ interface IContextTypeObj {
     addTodo: (text: string) => void,
     removeTodo: (id: string) => void,
     isDone: (id: string) => void,
-    inputEvent: (event: React.ChangeEvent<HTMLTextAreaElement>) => void,
     inputValue: string,
     editTodo: (id: string, text: string) => void,
 }
@@ -20,8 +19,6 @@ export const TodosContext = React.createContext<IContextTypeObj>({
     },
     isDone: () => {
     },
-    inputEvent: () => {
-    },
     inputValue: '',
     editTodo: () => {
     },
@@ -32,9 +29,7 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [enteredValue, setEnteredValue] = useState('');
 
-    const inputHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
-        setEnteredValue(event.target.value);
-    };
+
 
     const addTodosHandler = (text: string) => {
         const item = new Todo(text);
@@ -78,7 +73,6 @@ const TodosContextProvider: React.FC<PropsWithChildren> = (props) => {
         isDone: isDoneHandler,
         addTodo: addTodosHandler,
         removeTodo: removeTodoHandler,
-        inputEvent: inputHandler,
         inputValue: enteredValue,
         editTodo: editTodoTextHandler,
     }

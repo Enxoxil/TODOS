@@ -1,9 +1,16 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import NewTodo from "./NewTodo";
-import {TodosContext} from "../../BLL/todos-context";
+import {useRootDispatch} from "../../BLL/BLL_helpers/hooks";
+import {addTodo} from "../../BLL/todo-slice/todo-slice";
 
 const NewTodoContainer: React.FC = () => {
-    const {inputValue, addTodo} = useContext(TodosContext)
+    const [inputValue, setInputValue] = useState('')
+
+    const dispatch = useRootDispatch();
+
+    const inputHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+        setInputValue(event.target.value);
+    };
 
     const formSubmitHandler: React.FormEventHandler = (event) => {
         event.preventDefault();
@@ -12,20 +19,19 @@ const NewTodoContainer: React.FC = () => {
             console.log('Entered value is empty')
             return;
         }
-        addTodo(inputValue);
-
-    }
+        dispatch(addTodo({text: inputValue}));
+        setInputValue('');
+    };
 
     const onKeyDownHandler: React.KeyboardEventHandler = (event) => {
         if (event.key === 'Enter' && event.shiftKey) {
             formSubmitHandler(event);
         }
-    }
-
+    };
 
     return (
         <>
-            <NewTodo formSubmit={formSubmitHandler} inputValue={inputValue} onKeyDownHandler={onKeyDownHandler}/>
+            <NewTodo formSubmit={formSubmitHandler} inputValue={inputValue} inputHandler={inputHandler} onKeyDownHandler={onKeyDownHandler}/>
         </>
     )
 };

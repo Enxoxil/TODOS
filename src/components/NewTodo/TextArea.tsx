@@ -4,9 +4,8 @@ import {TodosContext} from "../../BLL/todos-context";
 import classes from './NewTodo.module.css'
 import {ITextArea} from "./Types/ITextArea";
 
-const TextArea: React.FC<ITextArea> = ({onKeyDownHandler}) => {
+const TextArea: React.FC<ITextArea> = ({onKeyDownHandler, inputValue, inputEvent}) => {
     const {TextArea} = Input;
-    const {inputEvent, inputValue} = useContext(TodosContext)
     return (
         <>
             <TextArea className={classes.textarea}

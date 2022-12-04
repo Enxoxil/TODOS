@@ -15,12 +15,14 @@ const initialState: IInitialState = {
     isDone: () => {},
 }
 
-export const todoSlice = createSlice({
-    name: 'todos',
+const todoSlice = createSlice({
+    name: 'todosSlice',
     initialState,
     reducers: {
         addTodo(state, action){
-
+            state.todos.push({
+                ...new Todo(action.payload.text)
+            })
         },
         removeTodo(state, action){
 
@@ -32,3 +34,4 @@ export const todoSlice = createSlice({
 })
 
 export const { addTodo, removeTodo, isDone } = todoSlice.actions
+export default todoSlice.reducer;
