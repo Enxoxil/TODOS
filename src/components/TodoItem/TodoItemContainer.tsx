@@ -1,14 +1,25 @@
-import React, {useContext, useState} from 'react';
-import {ITodoContainer} from "./Types/ITodoContainer";
-import TodoItem from "./TodoItem";
-import {TodosContext} from "../../BLL/todos-context";
+import React, {FC, useState} from 'react';
 
-const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
-    const {editTodo} = useContext(TodosContext);
-    const [editMode, setEditMode] = useState(props.edit);
+import TodoItem from "./TodoItem";
+import {useRootDispatch, useRootSelector} from "../../BLL/BLL_helpers/hooks";
+import {editTodo, isDone, removeTodo} from '../../BLL/store/todo-slice/todo-slice';
+import {ITodoContainer} from "./Types/ITodoContainer";
+
+const TodoItemContainer: FC<ITodoContainer> = (props) => {
+
+    const dispatch = useRootDispatch();
+    const [editMode, setEditMode] = useState(false);
     const [todoText, setTodoText] = useState(props.text);
 
-    const onEditActivateHandler = () => {
+    const onRemoveHandler = (id: string) => {
+        dispatch(removeTodo({id}));
+    }
+
+    const onIsDoneHandler = (id: string) => {
+        dispatch(isDone({id}));
+    }
+
+    const onActivateEditHandler = () => {
         setEditMode(!editMode);
     }
     const onEditHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -19,20 +30,29 @@ const TodoItemContainer: React.FC<ITodoContainer> = (props) => {
 
     const onBlurHandler: React.FocusEventHandler<HTMLInputElement> = (e) => {
         if (e.target.value !== '') {
-            editTodo(props.id, e.target.value);
+            dispatch(editTodo({text: todoText, id: props.id}));
         }
         setEditMode(!editMode);
     }
 
     const onSubmitHandler: React.FormEventHandler = (e) => {
         e.preventDefault();
-        editTodo(props.id, todoText);
+        dispatch(editTodo({text: todoText, id: props.id}));
         setEditMode(!editMode);
     }
+
     return (
         <>
-            <TodoItem editMode={editMode} todoText={todoText} onEditActivateHandler={onEditActivateHandler}
-                      onEditHandler={onEditHandler} onBlurHandler={onBlurHandler} onSubmitHandler={onSubmitHandler} {...props}
+            <TodoItem
+                onRemoveHandler={onRemoveHandler.bind(null, props.id)}
+                onIsDoneHandler={onIsDoneHandler.bind(null, props.id)}
+                editMode={editMode}
+                todoText={todoText}
+                onActivateEditHandler={onActivateEditHandler}
+                onEditHandler={onEditHandler}
+                onBlurHandler={onBlurHandler}
+                onSubmitHandler={onSubmitHandler}
+                {...props}
             />
         </>
     )

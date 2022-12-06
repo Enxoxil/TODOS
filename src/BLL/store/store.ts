@@ -1,6 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
-import todosReducer from "../todo-slice/todo-slice";
-import inputReducer from '../input-slice/input-slice'
+import todosReducer from "./todo-slice/todo-slice";
+import inputReducer from './input-slice/input-slice'
  const store = configureStore({
     reducer: {
         todosReducer,

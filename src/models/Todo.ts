@@ -4,12 +4,12 @@ export class Todo {
   id: string;
   checked: boolean;
   edit: boolean;
-  currentDate: number;
+  currentDate: string;
   constructor(enteredItem: string) {
       this.text = enteredItem;
       this.id = Math.random().toString();
       this.checked = false;
       this.edit = false;
-      this.currentDate = Date.now();
+      this.currentDate = new Date().toLocaleString().slice(0,-3);
   }
 }

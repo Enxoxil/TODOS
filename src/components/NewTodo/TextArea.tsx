@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {Input} from "antd";
-import {TodosContext} from "../../BLL/todos-context";
 import classes from './NewTodo.module.css'
 import {ITextArea} from "./Types/ITextArea";
 

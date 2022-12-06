@@ -9,7 +9,7 @@
 }
 
 .item.checked{
-    background-color: rgba(218, 78, 96, 0.47);
+    background-color: rgba(218, 78, 96, 0.2);
 }
 .input {
     display: block;
@@ -52,4 +52,14 @@
 .control input{
     cursor: pointer;
     border: none;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.date p{
+    display: block;
+    margin: 0;
 }

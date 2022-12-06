@@ -1,13 +1,12 @@
 import React, {FC} from 'react';
 import NewTodo from "./NewTodo";
 import {useRootDispatch, useRootSelector} from "../../BLL/BLL_helpers/hooks";
-import {addTodo} from "../../BLL/todo-slice/todo-slice";
-import {addInputValue, removeInputValue} from "../../BLL/input-slice/input-slice";
+import {addTodo} from "../../BLL/store/todo-slice/todo-slice";
+import {addInputValue, removeInputValue} from "../../BLL/store/input-slice/input-slice";
 
 const NewTodoContainer: FC = () => {
     const {inputValue} = useRootSelector(state => state.inputReducer);
     const dispatch = useRootDispatch();
-
     const inputHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
         dispatch(addInputValue({text: event.target.value}));
     };
@@ -31,7 +30,8 @@ const NewTodoContainer: FC = () => {
 
     return (
         <>
-            <NewTodo formSubmit={formSubmitHandler} inputValue={inputValue} inputHandler={inputHandler} onKeyDownHandler={onKeyDownHandler}/>
+            <NewTodo formSubmit={formSubmitHandler} inputValue={inputValue} inputHandler={inputHandler}
+                     onKeyDownHandler={onKeyDownHandler}/>
         </>
     )
 };
