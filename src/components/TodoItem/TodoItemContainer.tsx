@@ -22,6 +22,7 @@ const TodoItemContainer: FC<ITodoContainer> = (props) => {
     const onActivateEditHandler = () => {
         setEditMode(!editMode);
     }
+
     const onEditHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         if (e.target.value !== '') {
             setTodoText(e.target.value);

@@ -22,7 +22,6 @@ const Todos: FC = () => {
                     checked={item.checked}
                     text={item.text}
                     key={item.id}
-                    edit={item.edit}
                     id={item.id}
                     currentDate={item.currentDate}
                 />
