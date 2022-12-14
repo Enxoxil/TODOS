@@ -18,7 +18,7 @@ const NewTodoContainer: FC = () => {
             console.log('Entered value is empty')
             return;
         }
-        dispatch(addTodo({text: inputValue}));
+        dispatch(addTodo(inputValue));
         dispatch(removeInputValue());
     };
 

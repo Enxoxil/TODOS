@@ -31,13 +31,13 @@ const App = () => {
     const handleLogout = () => {
         setUser({...user!, login: false});
     }
-    console.log(user)
+
     return (
         <>
             <Navigation user={user!} handleLogout={handleLogout} handleLogin={handleLogin}/>
 
             <Routes>
-                <Route index element={'Home'}/>
+                <Route index element={<p style={{textAlign: 'center'}}>Тут будет компонент HOME</p>}/>
                 <Route path='home' element={<p style={{textAlign: 'center'}}>Тут будет компонент HOME</p>}/>
                 <Route path='auth' element={<p style={{textAlign: 'center'}}>Тут будет компонент AUTH</p>}/>
                 <Route path='todos' element={
