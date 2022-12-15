@@ -6,6 +6,7 @@ import {Route, Routes, BrowserRouter} from "react-router-dom";
 import {useState} from "react";
 import Navigation from "./components/Navigation/Navigation";
 import ProtectedRoute from "./Helpers/ProtectedRoute";
+import Auth from "./components/Auth/Auth";
 
 
 export interface IUser {
@@ -39,7 +40,7 @@ const App = () => {
             <Routes>
                 <Route index element={<p style={{textAlign: 'center'}}>Тут будет компонент HOME</p>}/>
                 <Route path='home' element={<p style={{textAlign: 'center'}}>Тут будет компонент HOME</p>}/>
-                <Route path='auth' element={<p style={{textAlign: 'center'}}>Тут будет компонент AUTH</p>}/>
+                <Route path='auth' element={<Auth/>}/>
                 <Route path='todos' element={
                     <ProtectedRoute isAllowed={user?.login! && user!.permissions.includes('admin')}>
                         <_PageHeader/>

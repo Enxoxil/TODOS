@@ -9,7 +9,7 @@ const NewTodo: React.FC<INewTodo> = ({formSubmit, inputValue, inputHandler, onKe
     return (
         <>
             <form onSubmit={formSubmit} className={classes.form}>
-                <label htmlFor='text'> shift + enter = add TODO, double click = edit TODO</label>
+                <label> shift + enter = add TODO, double click = edit TODO</label>
 
                 <TextArea
                     onKeyDownHandler={onKeyDownHandler}

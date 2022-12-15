@@ -1,32 +1,47 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Todo} from "../../../models/Todo";
 
+interface IAuth {
+    email: string;
+    idToken: string;
+    refreshToken: string;
+}
+
 interface IInitialState {
     todos: Todo[],
+    isAuth: IAuth,
 }
 
 const initialState: IInitialState = {
     todos: [],
+    isAuth: {
+        email: '',
+        idToken: '',
+        refreshToken: '',
+    }
 }
 
 const token = 'AIzaSyActbvWvQ9TQdBT51adIm-TCpxg0gZ5S7Q';
 
-export const authenticate = createAsyncThunk(
+export const authenticate = createAsyncThunk<IAuth, {email: string, password: string}, {rejectValue: string}>(
     'todosSlice/authenticate',
-    async (_, {
+    async ({email, password}, {
         rejectWithValue
     }) => {
         const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${token}`, {
             method : 'POST',
             body: JSON.stringify({
-                email: '_',
-                password: '_',
+                email,
+                password,
                 returnRescueToken: true,
-            })
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
 
         });
         if (!response.ok) {
-            return rejectWithValue('Server error');
+            return rejectWithValue('Error');
         }
         return await response.json();
     }
@@ -57,15 +72,12 @@ const todoSlice = createSlice({
             }
         }
     },
-    extraReducers: {
-        //
-        // [fetchTodos.pending]: (state, action) => {
-        // },
-        // [fetchTodos.fulfilled]: (state, action) => {
-        // },
-        // [fetchTodos.rejected]: (state, action) => {
-        //     // state.error = action.payload
-        // },
+    extraReducers: (builder) =>{
+        builder.addCase(authenticate.fulfilled, (state, action) => {
+            state.isAuth.idToken = action.payload.idToken;
+            state.isAuth.refreshToken = action.payload.refreshToken;
+            state.isAuth.email = action.payload.email;
+        })
     }
 })
 
