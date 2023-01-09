@@ -7,7 +7,7 @@ interface IProtectedRoute {
     children?: React.ReactElement | React.ReactElement[],
 }
 
-const ProtectedRoute: FC<IProtectedRoute> = ({isAllowed, redirectPath = '/auth', children}) => {
+const ProtectedRoute: FC<IProtectedRoute> = ({isAllowed, redirectPath = '/auth/signin', children}) => {
 
     if (!isAllowed) return <Navigate to={redirectPath} replace/>;
     return children ? <>{children}</> : <Outlet/>;

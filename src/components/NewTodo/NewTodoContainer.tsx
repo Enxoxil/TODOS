@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import NewTodo from "./NewTodo";
 import {useRootDispatch, useRootSelector} from "../../BLL/BLL_helpers/hooks";
-import {addTodo} from "../../BLL/store/todo-slice/todo-slice";
+import {addTodo, addTodoInBase} from "../../BLL/store/todo-slice/todo-slice";
 import {addInputValue, removeInputValue} from "../../BLL/store/input-slice/input-slice";
 
 const NewTodoContainer: FC = () => {
@@ -18,6 +18,8 @@ const NewTodoContainer: FC = () => {
             console.log('Entered value is empty')
             return;
         }
+        // @ts-ignore
+        dispatch(addTodoInBase(inputValue))
         dispatch(addTodo(inputValue));
         dispatch(removeInputValue());
     };

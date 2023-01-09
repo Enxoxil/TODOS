@@ -1,51 +1,41 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Todo} from "../../../models/Todo";
+import axios from "axios";
 
-interface IAuth {
-    email: string;
-    idToken: string;
-    refreshToken: string;
-}
+const token = 'AIzaSyActbvWvQ9TQdBT51adIm-TCpxg0gZ5S7Q';
+
+const API_URL = 'https://todo-list---rtk-default-rtdb.firebaseio.com/';
+const api = axios.create({
+    withCredentials: false,
+    baseURL: API_URL,
+})
 
 interface IInitialState {
     todos: Todo[],
-    isAuth: IAuth,
 }
 
 const initialState: IInitialState = {
     todos: [],
-    isAuth: {
-        email: '',
-        idToken: '',
-        refreshToken: '',
-    }
 }
 
-const token = 'AIzaSyActbvWvQ9TQdBT51adIm-TCpxg0gZ5S7Q';
+interface IAddTodoInBaseResponse {
+    text: string,
+}
 
-export const authenticate = createAsyncThunk<IAuth, {email: string, password: string}, {rejectValue: string}>(
-    'todosSlice/authenticate',
-    async ({email, password}, {
-        rejectWithValue
-    }) => {
-        const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${token}`, {
-            method : 'POST',
-            body: JSON.stringify({
-                email,
-                password,
-                returnRescueToken: true,
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
+interface IAddTodoInBaseRequest {
 
-        });
-        if (!response.ok) {
-            return rejectWithValue('Error');
-        }
-        return await response.json();
+}
+
+export const addTodoInBase = createAsyncThunk<IAddTodoInBaseRequest, IAddTodoInBaseResponse>(
+    'todosSlice/addTodoInBase',
+    async (text) => {
+
+        const response = await api.post('list.json',
+            text);
+        return response.data
     }
-)
+);
+
 
 const todoSlice = createSlice({
     name: 'todosSlice',
@@ -72,12 +62,8 @@ const todoSlice = createSlice({
             }
         }
     },
-    extraReducers: (builder) =>{
-        builder.addCase(authenticate.fulfilled, (state, action) => {
-            state.isAuth.idToken = action.payload.idToken;
-            state.isAuth.refreshToken = action.payload.refreshToken;
-            state.isAuth.email = action.payload.email;
-        })
+    extraReducers: () => {
+
     }
 })
 
