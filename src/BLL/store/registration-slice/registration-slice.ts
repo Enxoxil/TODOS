@@ -12,7 +12,7 @@ const api = axios.create({
 interface IAuthRequest {
     email: string;
     password: string;
-    returnSecureToken: boolean;
+    returnSecureToken?: boolean;
 }
 
 interface ISignUpResponse {

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Button, Form, Input} from "antd";
-import {useRootDispatch} from "../../BLL/BLL_helpers/hooks";
+import classes from './authForm.module.css';
 
 interface IForm {
     email: string,
@@ -9,24 +9,25 @@ interface IForm {
 
 interface IAuthForm {
     title: string,
-    action: any,
+    formHandler: (email: string, password: string) => void,
 }
 
-const AuthForm: FC<IAuthForm> = ({title, action}) => {
-    const dispatch = useRootDispatch();
+const AuthForm: FC<IAuthForm> = ({title, formHandler}) => {
+
     const [form] = Form.useForm();
-    const formHandler = ({email, password}: IForm) => {
-        dispatch(action({email, password, returnSecureToken: true}));
+    const formSubmitHandler = ({email, password}: IForm) => {
+        formHandler(email, password);
         form.resetFields();
     }
 
-
     return (
-        <>
+        <div className={classes.form_wrapper}>
             <Form
                 form={form}
                 scrollToFirstError={true}
-                onFinish={formHandler}>
+                onFinish={formSubmitHandler}
+                className={classes.form_body}
+            >
 
                 <Form.Item
                     name='email'
@@ -55,7 +56,7 @@ const AuthForm: FC<IAuthForm> = ({title, action}) => {
                     </Button>
                 </Form.Item>
             </Form>
-        </>
+        </div>
     )
 };
 
