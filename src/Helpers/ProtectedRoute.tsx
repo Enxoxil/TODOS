@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Navigate, Outlet} from "react-router-dom";
 
 interface IProtectedRoute {
-    isAllowed: boolean,
+    isAllowed: string | null,
     redirectPath?: string,
     children?: React.ReactElement | React.ReactElement[],
 }

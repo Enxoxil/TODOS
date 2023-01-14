@@ -1,37 +1,16 @@
-import {createAsyncThunk, createSlice, isRejectedWithValue} from "@reduxjs/toolkit";
-import axios, {AxiosResponse} from 'axios';
-
-const token = 'AIzaSyActbvWvQ9TQdBT51adIm-TCpxg0gZ5S7Q';
-
-const API_URL = 'https://identitytoolkit.googleapis.com/v1/';
-const api = axios.create({
-    withCredentials: false,
-    baseURL: API_URL,
-})
+import {createAsyncThunk, createSlice,} from "@reduxjs/toolkit";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth} from "firebase/auth";
+import type {UserCredential, User} from "firebase/auth";
 
 interface IAuthRequest {
-    email: string;
-    password: string;
-    returnSecureToken?: boolean;
-}
-
-interface ISignUpResponse {
-    idToken: string,
     email: string,
-    refreshToken: string,
-    expiresIn: string,
-    localId: string,
-    registered?: boolean,
-}
-
-interface ISignInResponse extends ISignUpResponse {
-
+    pass: string
 }
 
 export interface IInitialState {
-    email: string,
+    email: string | null,
     idToken: string,
-    registered?: boolean,
+    emailVerified: boolean,
     localId: string,
     refreshToken: string,
     expiresIn: string,
@@ -41,32 +20,30 @@ const initialState: IInitialState =
     {
         email: '',
         idToken: '',
-        registered: false,
+        emailVerified: false,
         localId: '',
         expiresIn: '',
         refreshToken: '',
     }
 
-
-export const registration = createAsyncThunk<ISignUpResponse, IAuthRequest>(
-    'todosSlice/registration',
-    async ({email, password, returnSecureToken}): Promise<ISignUpResponse> => {
-        const response = await api.post<ISignUpResponse>(`accounts:signUp?key=${token}`,
-            {email, password, returnSecureToken});
-        return response.data;
-
+export const signInWithEmailAndPass = createAsyncThunk(
+    'registrationSlice/signInWithEmailAndPass',
+    async ({email, pass}: IAuthRequest): Promise<User> => {
+        const auth = getAuth();
+        const userCredential = await signInWithEmailAndPassword(auth, email, pass);
+        return userCredential.user;
     }
-);
+)
 
-export const auth = createAsyncThunk<ISignUpResponse, IAuthRequest>(
-    'todosSlice/auth',
-    async ({email, password, returnSecureToken}): Promise<ISignUpResponse> => {
-        const response = await api.post<ISignUpResponse>(`accounts:signInWithPassword?key=${token}`,
-            {email, password, returnSecureToken});
-        return response.data;
 
+export const createUserWithEmailAndPass = createAsyncThunk(
+    'registrationSlice/createUserWithEmailAndPass',
+    async ({email, pass}: IAuthRequest): Promise<User> => {
+        const auth = getAuth();
+        const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+        return userCredential.user;
     }
-);
+)
 
 
 const registrationSlice = createSlice({
@@ -75,24 +52,20 @@ const registrationSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(registration.fulfilled, (state, action) => {
+            .addCase(createUserWithEmailAndPass.fulfilled, (state, action) => {
+                state.localId = action.payload.uid;
                 state.email = action.payload.email;
-                state.idToken = action.payload.idToken;
-                state.localId = action.payload.localId;
-                state.refreshToken = action.payload.refreshToken;
-                state.expiresIn = action.payload.expiresIn;
+                state.emailVerified = action.payload.emailVerified;
+
             });
         builder
-            .addCase(auth.fulfilled, (state, action) => {
+            .addCase(signInWithEmailAndPass.fulfilled, (state, action) => {
+                state.localId = action.payload.uid;
                 state.email = action.payload.email;
-                state.idToken = action.payload.idToken;
-                state.localId = action.payload.localId;
-                state.refreshToken = action.payload.refreshToken;
-                state.registered = action.payload.registered;
-                state.expiresIn = action.payload.expiresIn;
+                state.emailVerified = action.payload.emailVerified;
             })
 
     }
-})
+});
 
 export default registrationSlice.reducer;
