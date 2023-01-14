@@ -2,7 +2,7 @@ import './App.css';
 import Todos from "./components/Todos/Todos";
 import NewTodoContainer from "./components/NewTodo/NewTodoContainer";
 import _PageHeader from "./components/PageHeader/_PageHeader";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import React from "react";
 import Navigation from "./components/Navigation/Navigation";
 import ProtectedRoute from "./Helpers/ProtectedRoute";
@@ -13,9 +13,9 @@ import SignIn from "./components/Auth/SignIn/SignIn";
 
 const App = () => {
     const email = useRootSelector(state => state.registrationReducer.email);
-
+    const navigate = useNavigate();
     const handleLogin = () => {
-
+        navigate('/auth');
     }
     const handleLogout = () => {
 

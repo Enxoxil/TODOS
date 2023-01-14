@@ -31,7 +31,7 @@ export const addTodoInBase = createAsyncThunk<IAddTodoInBaseRequest, IAddTodoInB
     async (text) => {
 
         const response = await api.post('list.json',
-            text);
+            JSON.stringify(text));
         return response.data
     }
 );
